@@ -36,18 +36,20 @@
     </script>
 
 </head>
-<body>
+<body onload="fun()">
 <div id="nav-placeholder"></div>
 <br/>
 <div align="center" style="margin-left:10%;margin-top:20px">
     <div class="col-lg-5">
 
     </div>
-    <input type="button" id="scan" class="btn btn-default" onclick="fun()" value="Scan">
+    <input type="hidden" id="scan" class="btn btn-default" onclick="fun()" value="Scan" >
 
 </div>
 <div id="screen" class="div_class_name"></div>
+<div id="screen1" class="div_class_name"></div>
 <div id="temp" class="div_class_name"></div>
+<div id="temp1" class="div_class_name"></div>
 
 <script>
     function fun() {
@@ -61,15 +63,29 @@
                 var newcount = countstr.split(",")[1];
                 if (newcount > initcount) {
                     // alert(countstr.split(",")[3]);
-                    document.getElementById('rfid').value = countstr.split(',')[3];
+                    document.getElementById('rfid').innerHTML = countstr.split(',')[3];
+                    document.getElementById("myImg").src = "toll-gate-start-stop-13282715.jpg";
                     document.getElementById("scan").className = "btn btn-default";
                     clearInterval(myTimer);
                 }
-                timer = timer + 1;
-                if (timer == 60) {
+            },
+            1000);
+
+        $("#temp1").load('index31.php');
+        var myTimer1 = setInterval(function () {
+                document.getElementById("scan").className = "btn btn-warning";
+                var initcount = document.getElementById("temp1").innerHTML;
+                $("#screen1").load('index32.php');
+                var countstr = document.getElementById('screen1').innerHTML;
+                var newcount = countstr.split(",")[1];
+                if (newcount > initcount) {
+                    // alert(countstr.split(",")[3]);
+
+                  var x  = countstr.split(',')[3];
+                  
+                  if(x==0){location.reload();}
                     document.getElementById("scan").className = "btn btn-default";
                     clearInterval(myTimer);
-                    alert("timeout");
                 }
             },
             1000);
@@ -78,329 +94,14 @@
 
 <div align="center">
     <form class="form-horizontal" style="width: 80%" action='register.php' method='POST' enctype="multipart/form-data">
-        <fieldset>
-            <legend>Register</legend>
-            <div class='help-block'>* required fields</div>
             <div><span class='error'></span></div>
             <div class="form-group">
-                <label for="labelRfid" class="col-lg-2 control-label">Rfid </label>
                 <div class="col-lg-8">
-                    <input type="text" class="form-control" name='rfid' id='rfid'/>
+                    <h1 name='rfid' id='rfid'> </h1>
                 </div>
             </div>
-            <br/>
-            <div class="form-group">
-                <label for="labelname" class="col-lg-2 control-label">Your Full Name* </label>
-                <div class="col-lg-8">
-                    <input type="text" class="form-control" name='name' id='name' maxlength="50" placeholder="Full Name"
-                           required/>
-                </div>
-            </div>
-            <br/>
-
-            <div class="form-group">
-                <label for="inputEmail" class="col-lg-2 control-label">Email Address*</label>
-                <div class="col-lg-8">
-                    <input class="form-control" type='email' name='email' id='email' maxlength="50" placeholder="Email"
-                           required/>
-                </div>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label for="labelUID" class="col-lg-2 control-label">University Id*</label>
-                <div class="col-lg-8">
-                    <input type="text" class="form-control" name='uid' id='stuid' maxlength="10"
-                           placeholder="University Id"
-                           required/>
-                </div>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label for="labelAge" class="col-lg-2 control-label">Age*</label>
-                <div class="col-lg-8">
-                    <input type="text" class="form-control" name='age' id='age' maxlength="2" placeholder="Age"
-                           required/>
-                </div>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label for="labelDOB" class="col-lg-2 control-label">Date Of Birth*</label>
-                <div class="col-lg-8">
-                    <input class="form-control" type='date' name='date' id='date' required/>
-                </div>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label for="labelVehicle" class="col-lg-2 control-label">Vehicle*</label>
-                <div class="col-lg-8">
-                    <select id="Vehicle" class="form-control" name="vech" placeholder="vehicle type" required>
-                        <option value="car">Car</option>
-                        <option value="Bus">Bus</option>
-                        <option value="Bike">Bike</option>
-                    </select>
-                </div>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label for="labelVehicle" class="col-lg-2 control-label">Vehicle No</label>
-                <div class="col-lg-8">
-                    <input type="text" class="form-control" name='vechno' id='vechno' maxlength="15"
-                           placeholder="vehicle No" required/>
-                </div>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label for="labelPhoto" class="col-lg-2 control-label">Upload photo</label>
-                <div>
-                    <input type="file" name='photo' id='photo' placeholder="Upload photo" required/>
-                </div>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label for="labelLic" class="col-lg-2 control-label">License Number</label>
-                <div class="col-lg-8">
-                    <input type="text" class="form-control" name='lice' id='vechno' placeholder="License No" required/>
-                </div>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label for="labelPhone" class="col-lg-2 control-label">Phone number</label>
-                <div class="col-lg-8">
-                    <input type="text" class="form-control" name='phno' pattern="[789][0-9]{9}" id='phnNum'
-                           placeholder="Phone No"
-                           required/>
-                </div>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label for="inputPassword" class="col-lg-2 control-label">Engineering Branches</label>
-                <div class="col-lg-8">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="bt">BT
-                        </label>
-                        <label>
-                            <input type="checkbox" name="ce">CE
-                        </label>
-                        <label>
-                            <input type="checkbox" name="cse">CSE
-                        </label>
-                        <label>
-                            <input type="checkbox" name="ece">ECE
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="ecm">ECM
-                        </label>
-                        <label>
-                            <input type="checkbox" name="eee">EEE
-                        </label>
-                        <label>
-                            <input type="checkbox" name="me">ME
-                        </label>
-                        <label>
-                            <input type="checkbox" name="pe">PE
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label for="inputPassword" class="col-lg-2 control-label">Non-Engineering Branches</label>
-                <div class="col-lg-8">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="math"/> Maths
-                        </label>
-                        <label>
-                            <input type="checkbox" name="css">CSS
-                        </label>
-                        <label>
-                            <input type="checkbox" name="phy">PHYSICS
-                        </label>
-                        <label>
-                            <input type="checkbox" name="chem">CHEMISTRY
-                        </label>
-                        <label>
-                            <input type="checkbox" name="eng">ENGLISH
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="bes">BES
-                        </label>
-                        <label>
-                            <input type="checkbox" name="mba">MBA
-                        </label>
-                        <label>
-                            <input type="checkbox" name="bba">BBA
-                        </label>
-                        <label>
-                            <input type="checkbox" name="law">LAW
-                        </label>
-                        <label>
-                            <input type="checkbox" name="com">COMMERCE
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="bhm">BHM
-                        </label>
-                        <label>
-                            <input type="checkbox" name="pharm">PHARMACY
-                        </label>
-                        <label>
-                            <input type="checkbox" name="cams">CAMS
-                        </label>
-                        <label>
-                            <input type="checkbox" name="arch">ARCHITECTURE
-                        </label>
-
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-2 control-label">Choose Category</label>
-                <div class="col-lg-8">
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="category" value="0" checked="checked">
-                            Student
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="category" value="1">Teaching
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="category" value="2"> Non-Teaching
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <br/>
-            <div style="display: block" class="0 box">
-                <div class="form-group">
-                    <label for="labelpname" class="col-lg-2 control-label">Parent-Name*</label>
-                    <div class="col-lg-8">
-                        <input type="text" class="form-control" name='pname' id='vechno' placeholder="Parent Name"/>
-                    </div>
-                    <br/>
-                </div>
-                <div class="form-group">
-                    <label for="labelpphn" class="col-lg-2 control-label">Parent Phno*</label>
-                    <div class="col-lg-8">
-                        <input type="text" class="form-control" name='pphno' pattern="[789][0-9]{9}" id='vechno'
-                               placeholder="Parent Phno"/>
-                    </div>
-                </div>
-                <br/>
-                <div class="form-group">
-                    <label for="labelpaddr" class="col-lg-2 control-label">Parent-Address*</label>
-                    <div class="col-lg-8">
-                        <textarea name="padd" class="form-control" rows="10" cols="30"></textarea>
-                    </div>
-                </div>
-                <br/>
-                <div class="form-group">
-                    <label for="labelpemail" class="col-lg-2 control-label">Parent-Email</label>
-                    <div class="col-lg-8">
-                        <input type="email" class="form-control" name='pemail' id='pemail' placeholder="Parent Email">
-                    </div>
-                </div>
-                <br/>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Marital Status</label>
-                    <div class="col-lg-8">
-                        <div class="radio">
-                            <label>
-                                <input type="radio" value="Married" name='mstatus'>
-                                Yes
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" value="Not-Married" name='mstatus'>No
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br/>
-            <div class="1 box">
-                <div class="form-group">
-                    <label for="labelsname" class="col-lg-2 control-label">Spouse Name</label>
-                    <div class="col-lg-8">
-                        <input type='text' class="form-control" name='sname' id='vechno' placeholder="Spouse Name"/>
-                    </div>
-                </div>
-                <br/>
-                <div class="form-group">
-                    <label for="labelsphn" class="col-lg-2 control-label">Spouse Phno</label>
-                    <div class="col-lg-8">
-                        <input type='text' class="form-control" name='sno' id='snum' placeholder="Spouse Phno"/>
-                    </div>
-                </div>
-                <br/>
-            </div>
-            <div class="2 box">
-                <div class="form-group">
-                    <label for="labelsname" class="col-lg-2 control-label">Spouse Name</label>
-                    <div class="col-lg-8">
-                        <input type='text' class="form-control" name='sname' id='sname' placeholder="Spouse Name"/>
-                    </div>
-                </div>
-                <br/>
-                <div class="form-group">
-                    <label for="labelsphn" class="col-lg-2 control-label">Spouse Phno</label>
-                    <div class="col-lg-8">
-                        <input type='text' class="form-control" name='sno' id='snum' placeholder="Spouse Phno"/>
-                    </div>
-                </div>
-                <br/>
-            </div>
-
-            <br/>
-            <div class="form-group">
-                <label for="labelemer" class="col-lg-2 control-label">Emergency-Number*</label>
-                <span id='contactus_message_errorloc' class='error'></span>
-                <div class="col-lg-8">
-                    <input type="text" class="form-control" name="enum" placeholder="Emergency No"/>
-                </div>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label class="col-lg-2 control-label">Access*</label>
-                <span id='contactus_message_errorloc' class='error'></span>
-                <div class="col-lg-8">
-                    <div class="radio">
-                        <label>
-                            <input type='radio' value="master" name='type'/>Master
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type='radio' value="user" name='type'/>User
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <br/>
-            <br/>
-            <div class="form-group">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <a href="index.html">
-                        <button type="button" class="btn btn-default">Cancel
-                        </button>
-                    </a>
-                    <button type="submit" class="btn btn-warning" name='Submit' value='Submit'>Submit</button>
-                </div>
-            </div>
-        </fieldset>
     </form>
+    <img id ="myImg" src="toll-gate-start-stop-13282715 - Copy.jpg">
 </div>
 </body>
 </html>
