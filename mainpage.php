@@ -79,15 +79,19 @@ li a:hover {
     display: table;
     clear: both;
 }
+body{
+	background-repeat:no-repeat;
+
+   background-size:cover;
+}
 </style>
 </head>
 <body onload="fun()">
 
-<h2>Three Equal Columns</h2>
+<h1 align="center">SMART GATEWAY</h1>
 
 <div class="row">
   <div class="column" >
-    <h2>Column 1</h2>
 
     <button onclick="startWebcam();">Start WebCam</button>
     <button onclick="stopWebcam();">Stop WebCam</button> 
@@ -98,9 +102,10 @@ li a:hover {
         Screenshots : <p>
       <canvas  id="myCanvas" width="400" height="350"></canvas>  
         <form action="insert.php" method="POST">
+        	<input type="hidden" id="rfid1" name="rfid1"><br>
     Enter your name:<input type="text" name="name" id="name"><br>
     Purpose of visit:<input type="text" name="purpose" id="purpose"><br>
-    <input type = 'text' id = "test" name="test"><br>
+    <input type = 'hidden' id = "test" name="test"><br>
     <input type="submit" name="submit">
   </form>
   <script>
@@ -167,7 +172,6 @@ li a:hover {
   </script>
   </div>
   <div class="column" >
-    <h2>Column 2</h2>
     
 <div id="nav-placeholder"></div>
 <br/>
@@ -197,14 +201,16 @@ li a:hover {
                 if (newcount > initcount) {
                     var x = countstr.split('_')[3];
                     var im = countstr.split('_')[5];
+                    var name = countstr.split('_')[7];
                     if(x == 1){
                     document.getElementById('rfid').innerHTML = "Authorised User";
-                    document.getElementById("myImg").src = "toll-gate-start-stop-13282715.jpg";
+                    document.getElementById("myImg").src = "435.gif";
                     document.getElementById("scan").className = "btn btn-default";
                     document.getElementById("image").src = im;
+                    document.getElementById("nameofuser").innerHTML = name;
                 } 
                     else{
-                        location.reload();
+                     location.reload();  
                     }
                     clearInterval(myTimer);
                 }
@@ -241,13 +247,12 @@ li a:hover {
                 </div>
             </div>
     </form>
-    <img id ="myImg" src="toll-gate-start-stop-13282715 - Copy.jpg" style="max-width: 100%;max-height: 100%;">
+    <img id ="myImg" src="3740.gif" style="max-width: 100%;max-height: 100%;">
 </div>
 
   </div>
   <div class="column" >
-  	<h2>coloum 3</h2>
-    <img src="person-icon.png" id = 'image'>
+    <img src="person-icon.png" id = 'image' > 
     <br>
     <br>
     <div>Name:--<div id = 'nameofuser'></div></div>
