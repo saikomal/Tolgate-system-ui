@@ -13,19 +13,27 @@ if($result->num_rows>0){
        // echo "rfid";
        $id =  $row['id']; 
        $rfid =  $row['rfid'];
-       $sql = "select * from authorised where value = '".$rfid."'";
+       $sql = "select * from newuser where value = '".$rfid."'";
             $result1 = $conn->query($sql);
             if($result1->num_rows>0){
+                while($row1 = $result1->fetch_assoc()){
+                        $image = $row1['image'];
+                }
                         $rfid = 1;
-                        }
+                       echo "id_";
+            echo $id;            
+            echo "_rfid_";
+            echo $rfid;
+            echo "_image_";
+            echo $image;
+            }
                         else{
                             $rfid = 0;
-                        }
-
-            echo "id,";
+                        echo "id_";
             echo $id;            
-            echo ",rfid,";
+            echo "_rfid_";
             echo $rfid;
+                        }
     }
 }
 $conn->close();
