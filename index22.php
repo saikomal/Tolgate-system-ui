@@ -16,10 +16,10 @@ if($result->num_rows>0){
        $sql = "select * from authorised where value = '".$rfid."'";
             $result1 = $conn->query($sql);
             if($result1->num_rows>0){
-                        $rfid = "Authorised User";
+                        $rfid = 1;
                         }
                         else{
-                            $rfid = "Try again";
+                            $rfid = 0;
                         }
 
             echo "id,";

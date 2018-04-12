@@ -19,6 +19,30 @@
         label {
             margin-right: 15px;
         }
+
+        ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
     </style>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -37,6 +61,14 @@
 
 </head>
 <body onload="fun()">
+    <ul>
+  <li><a class="active" href="#home">Home</a></li>
+  <li><a href="#news">News</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#about">About</a></li>
+</ul>
+
+
 <div id="nav-placeholder"></div>
 <br/>
 <div align="center" style="margin-left:10%;margin-top:20px">
@@ -62,10 +94,14 @@
                 var countstr = document.getElementById('screen').innerHTML;
                 var newcount = countstr.split(",")[1];
                 if (newcount > initcount) {
-                    // alert(countstr.split(",")[3]);
-                    document.getElementById('rfid').innerHTML = countstr.split(',')[3];
+                    var x = countstr.split(',')[3];
+                    if(x == 1){
+                    document.getElementById('rfid').innerHTML = "Authorised User";
                     document.getElementById("myImg").src = "toll-gate-start-stop-13282715.jpg";
-                    document.getElementById("scan").className = "btn btn-default";
+                    document.getElementById("scan").className = "btn btn-default";}
+                    else{
+                        location.reload();
+                    }
                     clearInterval(myTimer);
                 }
             },
@@ -97,7 +133,7 @@
             <div><span class='error'></span></div>
             <div class="form-group">
                 <div class="col-lg-8">
-                    <h1 name='rfid' id='rfid'> </h1>
+                    <h1 name='rfid' id='rfid'>Tap Your Smart Card </h1>
                 </div>
             </div>
     </form>
